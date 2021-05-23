@@ -5,6 +5,10 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {},
+		fontFamily: {
+			fahkwang: ["Fahkwang", "sans-serif"],
+			inter: ["Inter", "sans-serif"],
+		},
 	},
 	variants: {
 		extend: {},
