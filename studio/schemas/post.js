@@ -18,6 +18,11 @@ export default {
 			},
 		},
 		{
+			name: "excerpt",
+			title: "Summery",
+			type: "excerptPortableText",
+		},
+		{
 			name: "author",
 			title: "Author",
 			type: "reference",
