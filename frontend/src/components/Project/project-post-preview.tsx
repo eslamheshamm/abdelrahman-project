@@ -1,37 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { imageUrlFor } from "../../helpers/image-url";
+import { Exhibition } from "../../pages/exhibition";
 import PortableText from "../objects/portableText";
-interface Props {
-	props: {};
-	title: "string";
-	excerpt: [];
-	slug: {
-		current: string;
-	};
-	mainImage: {
-		asset: {};
-		alt: string;
-	};
-}
+
+interface Props extends Exhibition {}
 const ProjectPostPreview: React.FC<Props> = (props) => {
-	console.log(props, "excerpt");
+	const { mainImage } = props;
+	const getImageSource = (): string | undefined => {
+		if (mainImage) {
+			const url = imageUrlFor(props.mainImage.asset.url)
+				.fit("clip")
+				.width(1200)
+				.height(Math.floor((16 / 17) * 1200))
+				.auto("format")
+				.url();
+			if (url) {
+				return url;
+			}
+		}
+	};
 	return (
 		<section className="flex flex-col">
 			<Link to={props.slug.current}>
 				{props.mainImage && props.mainImage.asset && (
 					<img
-						src={
-							props.mainImage &&
-							imageUrlFor(props.mainImage)
-								.fit("clip")
-								.width(1200)
-								.height(Math.floor((16 / 17) * 1200))
-								.auto("format")
-								.url()
-						}
+						src={getImageSource()}
 						className="hover:cursor-auto"
-						alt={props.mainImage.alt}
+						alt={props.mainImage.alt ? props.mainImage.alt : undefined}
 					/>
 				)}
 			</Link>

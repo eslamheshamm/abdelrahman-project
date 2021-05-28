@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import NavBar from "./components/navbar";
 import Home from "./pages/home";
 import Galleries from "./pages/galleries";
 import Exhibition from "./pages/exhibition";
@@ -11,7 +10,6 @@ const App: React.FC = () => {
 	return (
 		<Router>
 			<Layouts>
-				<NavBar />
 				<Switch>
 					<Route path="/" exact>
 						<Home />

@@ -1,32 +1,57 @@
 import React from "react";
 import SanityClient from "../helpers/client";
 import ProjectPostPreviewGrid from "../components/Project/press-post-preview-list";
-const Exhibition = () => {
-	const [postData, setPost] = React.useState(null);
+
+interface Excerpt {
+	children: Excerpt[];
+	style: string;
+	_key: string;
+	_type: string;
+}
+export interface Exhibition {
+	_id: string;
+	title: string;
+	slug: {
+		current: string;
+	};
+	mainImage: {
+		asset: {
+			url: string;
+		};
+		alt: string | null;
+	};
+	excerpt: Excerpt[];
+}
+
+const ExhibitionScreen = () => {
+	const [posts, setPosts] = React.useState<Exhibition[]>([]);
 	React.useEffect(() => {
-		SanityClient.fetch(
+		SanityClient.fetch<Exhibition[]>(
 			`
 			*[_type == 'post'] {
+				_id,
 				title, 
-			  slug,
-			  mainImage{
-				asset->{
-				  id,
-				  url
+				slug{
+					current
 				},
-				alt
-			  }
+				mainImage{
+					asset->{
+						url
+					},
+					alt
+				},
+				excerpt
 		}
     `
 		).then((data) => {
-			setPost(data);
+			setPosts(data);
 			console.log(data, "data");
 		});
 	}, []);
 	return (
-		<section>
-			<ProjectPostPreviewGrid data={postData} />
-		</section>
+		<>
+			<ProjectPostPreviewGrid data={posts} />
+		</>
 	);
 };
-export default Exhibition;
+export default ExhibitionScreen;

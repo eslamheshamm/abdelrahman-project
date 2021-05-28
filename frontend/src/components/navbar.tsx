@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 const NavBar: React.FC = () => {
 	return (
 		<header>
-			<nav className="flex justify-between font-fahkwang text-base font-bold mt-6">
+			<nav className="flex flex-col md:flex-row justify-between font-fahkwang text-base font-bold">
 				<h1>
 					<Link to="/">Abdelrahman Ibrahim</Link>
 				</h1>
-				<ul className="flex justify-between items-center  w-4/12 uppercase">
+				<ul className="flex justify-between md:items-center flex-col md:flex-row  md:w-4/12 uppercase">
 					<li>
 						<Link to="/">Home</Link>
 					</li>
