@@ -22,7 +22,7 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 	};
 	return (
 		<section className="flex flex-col">
-			<Link to={props.slug.current}>
+			<Link to={`/project/${props.slug.current}`}>
 				{props.mainImage && props.mainImage.asset && (
 					<img
 						src={getImageSource()}
@@ -31,16 +31,12 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 					/>
 				)}
 			</Link>
-			<Link to={props.slug.current}>
+			<Link to={`/project/${props.slug.current}`}>
 				<h1 className="mt-4 mb-2 uppercase text-2xl lg:text-3xl hover:underline">
 					{props.title}
 				</h1>
 			</Link>
-			{props.excerpt && (
-				<>
-					<PortableText blocks={props.excerpt} />
-				</>
-			)}
+			{props.excerpt && <PortableText blocks={props.excerpt} />}
 		</section>
 	);
 };
