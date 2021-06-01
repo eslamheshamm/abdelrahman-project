@@ -1,12 +1,14 @@
 import React from "react";
 import SanityClient from "../helpers/client";
-import ProjectPostPreviewGrid from "../components/Project/press-post-preview-list";
-
+import ProjectPostPreviewGrid from "../components/Project/project-post-preview-list";
 interface Excerpt {
 	children: Excerpt[];
 	style: string;
 	_key: string;
 	_type: string;
+}
+interface Gallery {
+	images: [];
 }
 export interface Exhibition {
 	_id: string;
@@ -21,6 +23,7 @@ export interface Exhibition {
 		alt: string | null;
 	};
 	excerpt: Excerpt[];
+	gallery: Gallery;
 }
 
 const ExhibitionScreen = () => {
@@ -40,12 +43,14 @@ const ExhibitionScreen = () => {
 					},
 					alt
 				},
-				excerpt
+				excerpt,
+				gallery {
+					images
+				}
 		}
     `
 		).then((data) => {
 			setPosts(data);
-			console.log(data, "data");
 		});
 	}, []);
 	return (
