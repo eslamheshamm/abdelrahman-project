@@ -8,8 +8,14 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import blockContent from "./blockContent";
 import category from "./category";
 import post from "./post";
-import gallery from "./documents/gallery";
+import portrait from "./documents/galleries/portrait";
+import documentary from "./documents/galleries/documentary";
+import cinematography from "./documents/galleries/cinematography";
+import street from "./documents/galleries/street";
+import commercialShots from "./documents/galleries/commercial-shots";
+
 // objects
+import gallery from "./objects/gallery";
 import mainImage from "./objects/mainImage";
 import excerptPortableText from "./objects/excerptPortableText";
 import galleryImage from "./objects/galleryImage";
@@ -23,6 +29,11 @@ export default createSchema({
 		// The following are document types which will appear
 		// in the studio.
 		post,
+		portrait,
+		documentary,
+		cinematography,
+		street,
+		commercialShots,
 		category,
 		gallery,
 		// When added to this list, object types can be used as
