@@ -6,7 +6,7 @@ const NavBar: React.FC = () => {
 				<h1>
 					<Link to="/">Abdelrahman Ibrahim</Link>
 				</h1>
-				<ul className="flex justify-between md:items-center flex-col md:flex-row  md:w-4/12 uppercase">
+				<ul className="flex justify-between md:items-center flex-col lg:flex-row  md:w-4/12 uppercase">
 					<li>
 						<Link to="/">Home</Link>
 					</li>
