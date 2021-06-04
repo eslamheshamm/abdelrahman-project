@@ -42,10 +42,10 @@ const MorePosts: React.FC<Props> = (props) => {
 			<div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
 				{posts &&
 					posts.map((post) => (
-						<Link to={`/project/${post.slug.current}`}>
+						<Link to={post.slug && `/project/${post.slug.current}`}>
 							<img
-								src={getImageSource(post.mainImage.asset.url)}
-								alt={post.mainImage.alt}
+								src={getImageSource(post.mainImage && post.mainImage.asset.url)}
+								alt={post.mainImage && post.mainImage.alt}
 							/>
 						</Link>
 					))}
