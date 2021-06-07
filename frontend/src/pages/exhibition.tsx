@@ -53,6 +53,7 @@ const ExhibitionScreen = () => {
 			setPosts(data);
 		});
 	}, []);
+	console.log(posts);
 	return (
 		<>
 			<ProjectPostPreviewGrid data={posts} />

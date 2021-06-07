@@ -8,13 +8,19 @@ import Contact from "./pages/contact";
 import Layouts from "./components/layots";
 import ProjectPost from "./components/Project/project-post";
 import ProjectPostPreview from "./components/Project/project-post-preview";
+import PortraitScreen from "./components/galleries/portrait";
+import { GallerImagePreview } from "./pages/galleries";
 const App: React.FC = () => {
 	return (
 		<Router>
 			<Layouts>
 				<Switch>
 					<Route path="/" exact component={Home} />
-					<Route path="/galleries" component={Galleries} />
+					<Route path="/galleries/" component={Galleries} />
+					<Route path="/gallery/:" component={GallerImagePreview} />
+
+					<Route path="/gallery/portrait" component={PortraitScreen} />
+
 					<Route path="/exhibition" component={Exhibition} />
 					<Route path="/project/:slug" component={ProjectPost} />
 					<Route path="/project/" component={ProjectPostPreview} />
