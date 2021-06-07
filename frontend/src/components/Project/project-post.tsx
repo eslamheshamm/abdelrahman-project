@@ -5,6 +5,7 @@ import { imageUrlFor } from "../../helpers/image-url";
 import PortableText from "../objects/portableText";
 import MorePosts from "./more-posts";
 import { ParamType, Project, Image, OtherPosts } from "./IfcProject";
+import { SRLWrapper } from "simple-react-lightbox";
 
 const ProjectPost: React.FC = () => {
 	const [postData, setPostData] = React.useState<Project>();
@@ -84,6 +85,13 @@ const ProjectPost: React.FC = () => {
 
 	if (!postData) return <p>Loading...</p>;
 	console.log(postData.mainImage.asset.url);
+	const options = {
+		buttons: {
+			showDownloadButton: false,
+			showAutoplayButton: false,
+			showThumbnailsButton: false,
+		},
+	};
 	return (
 		<article className="sm:w-12/12 mx-auto">
 			<figure className="w-full h-full">
@@ -111,33 +119,36 @@ const ProjectPost: React.FC = () => {
 			<div className="mt-4 mb-8">
 				{postData.body && <PortableText blocks={postData.body} />}
 			</div>
-			<div className="grid md:grid-cols-6 grid-flow-row-dense gap-6 justify-items-stretch place-items-stretch">
-				{postData.gallery &&
-					postData.gallery.images &&
-					postData.gallery.images.map((img: Image) => {
-						return (
-							<div
-								key={img._key}
-								className={`w-full h-full`}
-								style={{
-									gridColumnStart:
-										window.innerWidth > 750 ? `${img.columnStart}` : "",
-									gridColumnEnd:
-										window.innerWidth > 750 ? `${img.columnEnd}` : "",
-									gridRowStart:
-										window.innerWidth > 750 ? `${img.rowStart}` : "",
-									gridRowEnd: window.innerWidth > 750 ? `${img.rowEnd}` : "",
-								}}
-							>
-								<img
-									src={getImageSource(img.asset._ref)}
-									alt={img.alt}
-									className={`w-full h-full object-cover`}
-								/>
-							</div>
-						);
-					})}
-			</div>
+			<SRLWrapper options={options}>
+				<div className="grid md:grid-cols-6 grid-flow-row-dense gap-6 justify-items-stretch place-items-stretch">
+					{postData.gallery &&
+						postData.gallery.images &&
+						postData.gallery.images.map((img: Image) => {
+							return (
+								<div
+									key={img._key}
+									className={`w-full h-full`}
+									style={{
+										gridColumnStart:
+											window.innerWidth > 750 ? `${img.columnStart}` : "",
+										gridColumnEnd:
+											window.innerWidth > 750 ? `${img.columnEnd}` : "",
+										gridRowStart:
+											window.innerWidth > 750 ? `${img.rowStart}` : "",
+										gridRowEnd: window.innerWidth > 750 ? `${img.rowEnd}` : "",
+									}}
+								>
+									<img
+										src={getImageSource(img.asset._ref)}
+										alt={img.alt}
+										className={`w-full h-full object-cover hover:cursor-[zoom-in]`}
+									/>
+								</div>
+							);
+						})}
+				</div>
+			</SRLWrapper>
+
 			<MorePosts posts={otherPosts} />
 		</article>
 	);
