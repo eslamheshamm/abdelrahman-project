@@ -17,13 +17,11 @@ const App: React.FC = () => {
 				<Switch>
 					<Route path="/" exact component={Home} />
 					<Route path="/galleries/" component={Galleries} />
-					<Route path="/gallery/:" component={GallerImagePreview} />
-
-					<Route path="/gallery/portrait" component={PortraitScreen} />
-
+					<Route path="/gallery/" component={GallerImagePreview} />
+					<Route path="/gallery/:id" component={PortraitScreen} />
 					<Route path="/exhibition" component={Exhibition} />
-					<Route path="/project/:slug" component={ProjectPost} />
 					<Route path="/project/" component={ProjectPostPreview} />
+					<Route path="/project/:slug" component={ProjectPost} />
 					<Route path="/about" component={About} />
 					<Route path="/contact" component={Contact} />
 				</Switch>

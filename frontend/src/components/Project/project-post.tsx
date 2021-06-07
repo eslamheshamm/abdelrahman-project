@@ -4,7 +4,7 @@ import SanityClient from "../../helpers/client";
 import { imageUrlFor } from "../../helpers/image-url";
 import PortableText from "../objects/portableText";
 import MorePosts from "./more-posts";
-import { ParamType, Project, Image, OtherPosts } from "./IfcProject";
+import { ParamType, Project, Image, OtherPosts } from "./types";
 import { SRLWrapper } from "simple-react-lightbox";
 
 const ProjectPost: React.FC = () => {
@@ -14,54 +14,51 @@ const ProjectPost: React.FC = () => {
 	React.useEffect(() => {
 		SanityClient.fetch<Project[]>(
 			`
-    *[slug.current == "${slug}"] 
-    {
-			_id,
-			title, 
-				slug{
-					current
-				},
-			mainImage{
-				asset->{
-				url
-				},
-				alt
-			},
-				body,	
-			gallery {
-				images
-			},
-			publishedAt,
-			"categories": categories[]->title,
-
-			
-  	}
+	 *[slug.current == "${slug}"] 
+			{
+					_id,
+					title, 
+						slug{
+							current
+						},
+					mainImage{
+						asset->{
+						url
+						},
+						alt
+					},
+						body,	
+					gallery {
+						images
+					},
+					publishedAt,
+					"categories": categories[]->title,
+			}
     		`
 		)
 			.then((data) => {
 				setPostData(data[0]);
 			})
 			.catch(console.error);
-	}, [slug]);
-	React.useEffect(() => {
+
 		SanityClient.fetch<OtherPosts[]>(
 			`
-    *[_type == "post" && slug.current != "${slug}"]| order(publishedAt desc) [0..3]
-    { 
-			_id,
-				slug{
-					current
+		*[_type == "post" && slug.current != "${slug}"]| order(publishedAt desc) [0..3]
+		{ 
+				_id,
+					slug{
+						current
+					},
+				mainImage{
+					asset->{
+					url
+					},
+					alt
 				},
-			mainImage{
-				asset->{
-				url
-				},
-				alt
-			},
-
-			
-  	}
-    		`
+	
+				
+		  }
+				`
 		)
 			.then((data) => {
 				setOtherPosts(data);
@@ -69,6 +66,7 @@ const ProjectPost: React.FC = () => {
 			})
 			.catch(console.error);
 	}, [slug]);
+
 	const getImageSource = (image: string): string | undefined => {
 		if (postData) {
 			const url = imageUrlFor(image)
@@ -84,7 +82,7 @@ const ProjectPost: React.FC = () => {
 	};
 
 	if (!postData) return <p>Loading...</p>;
-	console.log(postData.mainImage.asset.url);
+	console.log(postData);
 	const options = {
 		buttons: {
 			showDownloadButton: false,
@@ -120,7 +118,7 @@ const ProjectPost: React.FC = () => {
 				{postData.body && <PortableText blocks={postData.body} />}
 			</div>
 			<SRLWrapper options={options}>
-				<div className="grid md:grid-cols-6 grid-flow-row-dense gap-6 justify-items-stretch place-items-stretch">
+				<div className="grid md:grid-cols-6 grid-flow-row-dense gap-8 justify-items-stretch place-items-stretch">
 					{postData.gallery &&
 						postData.gallery.images &&
 						postData.gallery.images.map((img: Image) => {

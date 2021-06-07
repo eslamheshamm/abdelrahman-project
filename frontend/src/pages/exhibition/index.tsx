@@ -1,6 +1,6 @@
 import React from "react";
-import SanityClient from "../helpers/client";
-import ProjectPostPreviewGrid from "../components/Project/project-post-preview-list";
+import SanityClient from "../../helpers/client";
+import ProjectPostPreviewGrid from "../../components/Project/project-post-preview-list";
 interface Excerpt {
 	children: Excerpt[];
 	style: string;

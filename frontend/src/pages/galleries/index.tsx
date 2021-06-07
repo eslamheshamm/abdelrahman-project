@@ -1,23 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import portrait from "../components/assets/portrait.png";
-import documentary from "../components/assets/documentary.png";
-import cinematography from "../components/assets/cinematography.png";
-import street from "../components/assets/street.png";
-import commercialShots from "../components/assets/commercial-shots.png";
+import portrait from "../../components/assets/portrait.png";
+import documentary from "../../components/assets/documentary.png";
+import cinematography from "../../components/assets/cinematography.png";
+import street from "../../components/assets/street.png";
+import commercialShots from "../../components/assets/commercial-shots.png";
+import { ImageProps, Gallery } from "./types";
 
-interface ImageProps {
-	title: string;
-	img: string;
-	alt: string;
-	to: any;
-}
-interface Gallery {
-	title: string;
-	id: string;
-	alt: string;
-	img: string;
-}
 export const GallerImagePreview: React.FC<ImageProps> = (props) => {
 	const { alt, img, title, to } = props;
 	return (

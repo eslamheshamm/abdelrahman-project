@@ -1,29 +1,10 @@
 import React, { useEffect, useState } from "react";
-import SanityClient from "../../helpers/client";
-interface Gallery {
-	images: [];
-}
-interface Excerpt {
-	children: Excerpt[];
-	style: string;
-	_key: string;
-	_type: string;
-}
-
-interface PortraitProps {
-	title: string;
-	_id: string;
-	gallery: Gallery;
-	mainImage: {
-		asset: {
-			url: string;
-		};
-		alt: string | null;
-	};
-	excerpt: Excerpt[];
-}
+import SanityClient from "../../../helpers/client";
+import { PortraitProps } from "./types";
+import { useParams } from "react-router-dom";
 const PortraitScreen = () => {
-	const [posts, setPosts] = useState<PortraitProps[]>([]);
+	console.log();
+	const [data, setData] = useState<PortraitProps[]>([]);
 	useEffect(() => {
 		SanityClient.fetch<PortraitProps[]>(
 			`
@@ -45,11 +26,10 @@ const PortraitScreen = () => {
 		}
     `
 		).then((data) => {
-			setPosts(data);
-			console.log(data);
+			setData(data);
 		});
 	}, []);
-	console.log(posts);
+	console.log(data[0]);
 	return (
 		<section className="text-4xl">
 			<h2>Hello !!</h2>

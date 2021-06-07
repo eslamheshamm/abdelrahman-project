@@ -41,8 +41,8 @@ const MorePosts: React.FC<Props> = (props) => {
 			</h2>
 			<div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
 				{posts &&
-					posts.map((post) => (
-						<Link to={post.slug && `/project/${post.slug.current}`}>
+					posts.map((post, index) => (
+						<Link to={post.slug && `/project/${post.slug.current}`} key={index}>
 							<img
 								src={getImageSource(post.mainImage && post.mainImage.asset.url)}
 								alt={post.mainImage && post.mainImage.alt}
