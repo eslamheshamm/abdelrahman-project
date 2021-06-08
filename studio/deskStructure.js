@@ -9,7 +9,7 @@ const hiddenDocTypes = (listItem) =>
 		"documentary",
 		"cinematography",
 		"street",
-		"commercialShots",
+		"commercial-shots",
 	].includes(listItem.getId());
 
 export default () =>

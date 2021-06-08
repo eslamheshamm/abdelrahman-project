@@ -1,5 +1,5 @@
 export default {
-	name: "commercialShots",
+	name: "commercial-shots",
 	title: "Commercial Shots",
 	type: "document",
 	// __experimental_actions: [/*'create',*/ "update", /*'delete',*/ "publish"],
