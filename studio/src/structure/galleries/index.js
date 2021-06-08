@@ -40,13 +40,13 @@ const Galleries = S.listItem()
 						S.editor().id("street").schemaType("street").documentId("street")
 					),
 				S.documentListItem()
-					.schemaType("commercialShots")
+					.schemaType("commercial-shots")
 					.title("Commercial Shots")
 					.child(
 						S.editor()
-							.id("commercialShots")
-							.schemaType("commercialShots")
-							.documentId("commercialShots")
+							.id("commercial-shots")
+							.schemaType("commercial-shots")
+							.documentId("commercial-shots")
 					),
 			])
 	);
