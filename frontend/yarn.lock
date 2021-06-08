@@ -1909,6 +1909,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-responsive@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-responsive/-/react-responsive-8.0.2.tgz#959fdc32f72e38b807e32be617a74be2c315081b"
+  integrity sha512-DTvm3Hb77v0hme7L4GYzRjLQqlZP+zNImFBzdKbSH7CsQ5c7QebGnSQX2Xf3BaA0rm/TQE57eFMhMGLcMe/A9w==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-router-dom@^5.1.7":
   version "5.1.7"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
@@ -5674,6 +5681,11 @@ gzip-size@5.1.1:
   dependencies:
     duplexer "^0.1.1"
     pify "^4.0.1"
+
+hamburger-react@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.4.1.tgz#44fac99c30720fe8ed098b2a33e919b14b3e007e"
+  integrity sha512-oqG9CrTVi8wM/dyQQh3JJOOfEiol9ChLOqwtjx+hFyRu0nYfe2ymNmzi2wtfQTDyExUdqETdyACZV9KZ9wpApA==
 
 handle-thing@^2.0.0:
   version "2.0.1"
