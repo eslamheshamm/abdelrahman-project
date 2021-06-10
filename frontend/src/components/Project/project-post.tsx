@@ -7,6 +7,8 @@ import MorePosts from "./more-posts";
 import { ParamType, Project, Image, OtherPosts } from "./types";
 import { SRLWrapper } from "simple-react-lightbox";
 import { useMediaQuery } from "react-responsive";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ProjectPost: React.FC = () => {
 	const [postData, setPostData] = useState<Project>();
@@ -122,32 +124,35 @@ const ProjectPost: React.FC = () => {
 
 	return (
 		<article className="w-11/12 mx-auto">
-			<figure className="w-full h-full">
-				<img
-					src={getImageSource(post.mainImage.asset.url)}
-					alt={post.mainImage.alt}
-					className="w-full h-[400px] object-cover"
-				/>
-			</figure>
-			<h2 className=" text-2xl md:text-7xl uppercase mt-8 mb-4 ">
-				{post.title && post.title}
-			</h2>
-			<div className="flex items-center">
-				{post.categories &&
-					post.categories.map((category, index) => (
-						<p className="font-fahkwang uppercase text-xl" key={index}>
-							{category}
-						</p>
-					))}
-				<i className="mx-4 text-4xl font-bold">{Dot}</i>
-				<time className="text-xl font-fahkwang">
-					{new Date(post.publishedAt).toLocaleDateString("en-GB")}
-				</time>
-			</div>
-			<div className="mt-4 mb-8">
-				{post.body && <PortableText blocks={post.body} />}
-			</div>
 			<SRLWrapper options={options}>
+				<figure className="w-full h-full">
+					<LazyLoadImage
+						src={getImageSource(post.mainImage.asset.url)}
+						alt={post.mainImage.alt}
+						effect="blur"
+						width="100%"
+						height="100%"
+						className="w-full h-[400px] object-cover cursor-[zoom-in]"
+					/>
+				</figure>
+				<h2 className=" text-2xl md:text-7xl uppercase mt-8 mb-4 ">
+					{post.title && post.title}
+				</h2>
+				<div className="flex items-center">
+					{post.categories &&
+						post.categories.map((category, index) => (
+							<p className="font-fahkwang uppercase text-xl" key={index}>
+								{category}
+							</p>
+						))}
+					<i className="mx-4 text-4xl font-bold">{Dot}</i>
+					<time className="text-xl font-fahkwang">
+						{new Date(post.publishedAt).toLocaleDateString("en-GB")}
+					</time>
+				</div>
+				<div className="mt-4 mb-8">
+					{post.body && <PortableText blocks={post.body} />}
+				</div>
 				<div className="grid md:grid-cols-6 grid-flow-row-dense gap-8 justify-items-stretch place-items-stretch">
 					{post.gallery &&
 						post.gallery.images &&
@@ -163,9 +168,12 @@ const ProjectPost: React.FC = () => {
 										gridRowEnd: isNotMobile ? `${img.rowEnd}` : "",
 									}}
 								>
-									<img
+									<LazyLoadImage
 										src={getImageSource(img.asset._ref)}
 										alt={img.alt}
+										effect="blur"
+										width="100%"
+										height="100%"
 										className={`w-full h-full object-cover hover:cursor-[zoom-in]`}
 									/>
 								</div>

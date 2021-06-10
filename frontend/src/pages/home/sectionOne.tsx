@@ -6,7 +6,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const SectionOne: React.FC = () => {
 	return (
-		<article className="w-11/12 mx-auto justify-items-center grid lg:grid-cols-2 gap-6">
+		<article className="w-11/12 mx-auto justify-items-center grid lg:grid-cols-2 gap-2">
 			<div className="h-full ">
 				<h2 className=" text-3xl md:text-7xl">
 					Project <br className="hidden lg:block xl:hidden" /> Title
@@ -35,7 +35,7 @@ const SectionOne: React.FC = () => {
 						effect="blur"
 						width="100%"
 						height="100%"
-						className="aspect-w-1 aspect-w-1 object-cover object-center"
+						className="aspect-w-1 aspect-w-1 object-cover object-center w-full h-full"
 					/>
 				</figure>
 				<figure className="h-full  ">
@@ -45,7 +45,7 @@ const SectionOne: React.FC = () => {
 						effect="blur"
 						width="100%"
 						height="100%"
-						className="aspect-w-1 aspect-w-1 object-cover object-center"
+						className="aspect-w-1 aspect-w-1 object-cover object-center w-full h-full"
 					/>
 				</figure>
 				<figure className="h-full  ">
@@ -55,7 +55,7 @@ const SectionOne: React.FC = () => {
 						effect="blur"
 						width="100%"
 						height="100%"
-						className="aspect-w-1 aspect-w-1  object-cover object-center"
+						className="aspect-w-1 aspect-w-1 object-cover object-center w-full h-full"
 					/>
 				</figure>
 				<figure className="h-full  ">
@@ -65,7 +65,7 @@ const SectionOne: React.FC = () => {
 						effect="blur"
 						width="100%"
 						height="100%"
-						className="aspect-w-1 aspect-w-1 object-cover object-center"
+						className="aspect-w-1 aspect-w-1 object-cover object-center w-full h-full"
 					/>
 				</figure>
 			</div>

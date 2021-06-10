@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { imageUrlFor } from "../../helpers/image-url";
 import { Exhibition } from "../../pages/exhibition";
 import PortableText from "../objects/portableText";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 interface Props extends Exhibition {}
 const ProjectPostPreview: React.FC<Props> = (props) => {
@@ -21,12 +23,15 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 		}
 	};
 	return (
-		<section className="flex flex-col">
+		<article className="flex flex-col">
 			<Link to={props.slug && `/project/${props.slug.current}`}>
 				{props.mainImage && props.mainImage.asset && (
-					<img
+					<LazyLoadImage
 						src={getImageSource()}
-						className="hover:cursor-auto"
+						effect="opacity"
+						width="100%"
+						height="100%"
+						className=" cursor-pointer"
 						alt={props.mainImage.alt ? props.mainImage.alt : undefined}
 					/>
 				)}
@@ -37,7 +42,7 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 				</h1>
 			</Link>
 			{props.excerpt && <PortableText blocks={props.excerpt} />}
-		</section>
+		</article>
 	);
 };
 

@@ -6,7 +6,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const SectionThree: React.FC = () => {
 	return (
-		<article className="w-11/12 mx-auto justify-items-center grid lg:grid-cols-2 grid-rows-1 gap-6 my-24">
+		<article className="w-11/12 mx-auto justify-items-center grid lg:grid-cols-2 grid-rows-1 gap-2 my-24">
 			<div className="grid grid-cols-2 h-full gap-2 w-full row-start-1 grid-rows-1  md:row-start-auto ">
 				<figure className="h-full  ">
 					<LazyLoadImage

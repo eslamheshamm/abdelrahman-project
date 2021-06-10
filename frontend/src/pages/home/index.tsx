@@ -2,15 +2,17 @@ import React, { lazy, Suspense } from "react";
 import backgroundImage from "../../components/assets/cinematography.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import SectionTwo from "./sectionTwo";
+import SectionOne from "./sectionOne";
+import SectionThree from "./sectionThree";
+import SectionFour from "./sectionFour";
 const GallaryComponent = lazy(() => import("../galleries"));
-const SectionOne = lazy(() => import("./sectionOne"));
-const SectionTwo = lazy(() => import("./sectionTwo"));
-const SectionThree = lazy(() => import("./sectionThree"));
-const SectionFour = lazy(() => import("./sectionFour"));
 
-const renderLoader = () => <p>Loading</p>;
+const renderLoader = () => (
+	<p className="text-3xl w-11/12 mx-auto">Loading..</p>
+);
 
-const Home = () => {
+const Home: React.FC = () => {
 	return (
 		<section>
 			<Suspense fallback={renderLoader()}>

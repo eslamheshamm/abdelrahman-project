@@ -1,11 +1,19 @@
 import React from "react";
 import profile from "../../components/assets/profile.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 const About: React.FC = () => {
 	return (
 		<section className="grid md:grid-cols-2 gap-8 lg:gap-20 w-10/12 mx-auto place-items-center  ">
 			<div className="w-full h-full place-self-end flex justify-center items-center object-cover">
 				<figure className="w-full h-full">
-					<img src={profile} alt="w-full h-full object-cover" />
+					<LazyLoadImage
+						src={profile}
+						alt="w-full h-full object-cover"
+						effect="opacity"
+						width="100%"
+						height="100%"
+					/>
 				</figure>
 			</div>
 			<div>
