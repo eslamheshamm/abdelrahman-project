@@ -7,17 +7,24 @@ import { imageUrlFor } from "../../helpers/image-url";
 import { SRLWrapper } from "simple-react-lightbox";
 import { useMediaQuery } from "react-responsive";
 
-const GalleryScreen = () => {
-	const { id } = useParams<ParamType>();
-
-	const isNotMobile = useMediaQuery({ minWidth: 768 });
-
+const GalleryScreen: React.FC = () => {
 	const [data, setData] = useState<PortraitProps[]>([]);
+	const [error, setError] = useState(null);
+	const { id } = useParams<ParamType>();
+	const isNotMobile = useMediaQuery({ minWidth: 768 });
 	const options = {
 		buttons: {
-			showDownloadButton: false,
+			backgroundColor: "#161616cc",
+			iconColor: "rgba(221, 221, 221, 0.8)",
+			iconPadding: "10px",
 			showAutoplayButton: false,
+			showCloseButton: true,
+			showDownloadButton: false,
+			showFullscreenButton: false,
+			showNextButton: true,
+			showPrevButton: true,
 			showThumbnailsButton: false,
+			size: "30px",
 		},
 	};
 	const getImageSource = (image: string): string | undefined => {
@@ -51,14 +58,33 @@ const GalleryScreen = () => {
 				}
 		}
     `
-		).then((data) => {
-			setData(data);
-		});
+		)
+			.then((data) => {
+				setData(data);
+			})
+			.catch((error) => {
+				setError(error);
+				console.log(error);
+			});
 	}, [id]);
+
 	let gallery = data[0];
-	if (!gallery) <p className="text-4xl text-center">loading...</p>;
+	if (error)
+		return (
+			<div
+				className="  border-l-4 bg-yellow-200 border-yellow-500 w-11/12 mx-auto text-orange-700 p-4"
+				role="alert"
+			>
+				<p className="font-bold">500 Internal Server Error Oh no!</p>
+				<p>
+					Something bad happened. Please come back later when we fixed that
+					problem. Thanks.
+				</p>
+			</div>
+		);
+	if (!data) return <p className="text-4xl text-center">loading...</p>;
 	return (
-		<section className="">
+		<section className="w-10/12 mx-auto">
 			<h2 className="uppercase text-3xl sm:text-4xl md:text-7xl text-center ">
 				{gallery && gallery.title}
 			</h2>

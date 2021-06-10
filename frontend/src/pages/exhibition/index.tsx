@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SanityClient from "../../helpers/client";
 import ProjectPostPreviewGrid from "../../components/Project/project-post-preview-list";
 interface Excerpt {
@@ -26,9 +26,10 @@ export interface Exhibition {
 	gallery: Gallery;
 }
 
-const ExhibitionScreen = () => {
-	const [posts, setPosts] = React.useState<Exhibition[]>([]);
-	React.useEffect(() => {
+const ExhibitionScreen: React.FC = () => {
+	const [posts, setPosts] = useState<Exhibition[]>([]);
+	const [error, setError] = useState(null);
+	useEffect(() => {
 		SanityClient.fetch<Exhibition[]>(
 			`
 			*[_type == 'post'] {
@@ -49,14 +50,35 @@ const ExhibitionScreen = () => {
 				}
 		}
     `
-		).then((data) => {
-			setPosts(data);
-		});
+		)
+			.then((data) => {
+				setPosts(data);
+			})
+			.catch((error) => {
+				setError(error);
+				console.log(error);
+			});
 	}, []);
-	console.log(posts);
+	const previewPosts = posts!;
+	if (error)
+		return (
+			<div
+				className="  border-l-4 bg-yellow-200 border-yellow-500 w-10/12 mx-auto text-orange-700 p-4"
+				role="alert"
+			>
+				<p className="font-bold">500 Internal Server Error Oh no!</p>
+				<p>
+					Something bad happened. Please come back later when we fixed that
+					problem. Thanks.
+				</p>
+			</div>
+		);
+	if (!previewPosts)
+		return <p className="w-10/12 mx-auto text-3xl font-bold">Loading...</p>;
+
 	return (
 		<>
-			<ProjectPostPreviewGrid data={posts} />
+			<ProjectPostPreviewGrid data={previewPosts} />
 		</>
 	);
 };

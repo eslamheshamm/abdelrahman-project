@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SanityClient from "../../helpers/client";
 import { imageUrlFor } from "../../helpers/image-url";
@@ -6,12 +6,43 @@ import PortableText from "../objects/portableText";
 import MorePosts from "./more-posts";
 import { ParamType, Project, Image, OtherPosts } from "./types";
 import { SRLWrapper } from "simple-react-lightbox";
+import { useMediaQuery } from "react-responsive";
 
 const ProjectPost: React.FC = () => {
-	const [postData, setPostData] = React.useState<Project>();
-	const [otherPosts, setOtherPosts] = React.useState<OtherPosts[]>([]);
+	const [postData, setPostData] = useState<Project>();
+	const [otherPosts, setOtherPosts] = useState<OtherPosts[]>([]);
+	const [error, setError] = useState(null);
 	const { slug } = useParams<ParamType>();
-	React.useEffect(() => {
+	const isNotMobile = useMediaQuery({ minWidth: 768 });
+	const options = {
+		buttons: {
+			backgroundColor: "#161616cc",
+			iconColor: "rgba(221, 221, 221, 0.8)",
+			iconPadding: "10px",
+			showAutoplayButton: false,
+			showCloseButton: true,
+			showDownloadButton: false,
+			showFullscreenButton: false,
+			showNextButton: true,
+			showPrevButton: true,
+			showThumbnailsButton: false,
+			size: "30px",
+		},
+	};
+	const getImageSource = (image: string): string | undefined => {
+		if (postData) {
+			const url = imageUrlFor(image)
+				.fit("clip")
+				.width(1200)
+				.height(Math.floor((16 / 17) * 1200))
+				.auto("format")
+				.url();
+			if (url) {
+				return url;
+			}
+		}
+	};
+	useEffect(() => {
 		SanityClient.fetch<Project[]>(
 			`
 	 *[slug.current == "${slug}"] 
@@ -39,7 +70,10 @@ const ProjectPost: React.FC = () => {
 			.then((data) => {
 				setPostData(data[0]);
 			})
-			.catch(console.error);
+			.catch((error) => {
+				setError(error);
+				console.log(error);
+			});
 
 		SanityClient.fetch<OtherPosts[]>(
 			`
@@ -64,76 +98,69 @@ const ProjectPost: React.FC = () => {
 				setOtherPosts(data);
 				console.log("preview", data);
 			})
-			.catch(console.error);
+			.catch((error) => {
+				console.log(error);
+			});
 	}, [slug]);
+	let post = postData!;
 
-	const getImageSource = (image: string): string | undefined => {
-		if (postData) {
-			const url = imageUrlFor(image)
-				.fit("clip")
-				.width(1200)
-				.height(Math.floor((16 / 17) * 1200))
-				.auto("format")
-				.url();
-			if (url) {
-				return url;
-			}
-		}
-	};
+	if (error)
+		return (
+			<div
+				className="  border-l-4 bg-yellow-200 border-yellow-500 w-11/12 mx-auto text-orange-700 p-4"
+				role="alert"
+			>
+				<p className="font-bold">500 Internal Server Error Oh no!</p>
+				<p>
+					Something bad happened. Please come back later when we fixed that
+					problem. Thanks.
+				</p>
+			</div>
+		);
+	if (!post)
+		return <p className="w-11/12 mx-auto text-3xl font-bold">Loading...</p>;
 
-	if (!postData) return <p>Loading...</p>;
-	console.log(postData);
-	const options = {
-		buttons: {
-			showDownloadButton: false,
-			showAutoplayButton: false,
-			showThumbnailsButton: false,
-		},
-	};
 	return (
-		<article className="sm:w-12/12 mx-auto">
+		<article className="w-11/12 mx-auto">
 			<figure className="w-full h-full">
 				<img
-					src={getImageSource(postData.mainImage.asset.url)}
-					alt={postData.mainImage.alt}
+					src={getImageSource(post.mainImage.asset.url)}
+					alt={post.mainImage.alt}
 					className="w-full h-[400px] object-cover"
 				/>
 			</figure>
 			<h2 className=" text-2xl md:text-7xl uppercase mt-8 mb-4 ">
-				{postData.title && postData.title}
+				{post.title && post.title}
 			</h2>
 			<div className="flex items-center">
-				{postData.categories &&
-					postData.categories.map((category, index) => (
+				{post.categories &&
+					post.categories.map((category, index) => (
 						<p className="font-fahkwang uppercase text-xl" key={index}>
 							{category}
 						</p>
 					))}
 				<i className="mx-4 text-4xl font-bold">{Dot}</i>
 				<time className="text-xl font-fahkwang">
-					{new Date(postData.publishedAt).toLocaleDateString("en-GB")}
+					{new Date(post.publishedAt).toLocaleDateString("en-GB")}
 				</time>
 			</div>
 			<div className="mt-4 mb-8">
-				{postData.body && <PortableText blocks={postData.body} />}
+				{post.body && <PortableText blocks={post.body} />}
 			</div>
 			<SRLWrapper options={options}>
 				<div className="grid md:grid-cols-6 grid-flow-row-dense gap-8 justify-items-stretch place-items-stretch">
-					{postData.gallery &&
-						postData.gallery.images &&
-						postData.gallery.images.map((img: Image) => {
+					{post.gallery &&
+						post.gallery.images &&
+						post.gallery.images.map((img: Image) => {
 							return (
 								<div
 									key={img._key}
 									className={`w-full h-full`}
 									style={{
-										gridColumnStart:
-											window.innerWidth > 750 ? `${img.columnStart}` : "",
-										gridColumnEnd:
-											window.innerWidth > 750 ? `${img.columnEnd}` : "",
-										gridRowStart:
-											window.innerWidth > 750 ? `${img.rowStart}` : "",
-										gridRowEnd: window.innerWidth > 750 ? `${img.rowEnd}` : "",
+										gridColumnStart: isNotMobile ? `${img.columnStart}` : "",
+										gridColumnEnd: isNotMobile ? `${img.columnEnd}` : "",
+										gridRowStart: isNotMobile ? `${img.rowStart}` : "",
+										gridRowEnd: isNotMobile ? `${img.rowEnd}` : "",
 									}}
 								>
 									<img
