@@ -1,6 +1,4 @@
-Base directory | ./ |
-Build command | CI= craco build 
-Publish directory | ./build 
+ CI= npm run build 
 
  [[redirects]]
   from = "/*"
