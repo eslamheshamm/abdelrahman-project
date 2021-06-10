@@ -13,7 +13,7 @@ p {
 
 .ele {
 	animation-name: fadeIn;
-	animation-duration: 0.4s;
+	animation-duration: 0.3s;
 	animation-timing-function: ease-in-out;
 }
 
@@ -24,8 +24,11 @@ p {
 		transform: translateY(60px);
 	}
 	100% {
-		background-color: white;
 		opacity: 1;
 		transform: translateY(0);
 	}
+}
+
+.hide-content {
+	overflow: hidden;
 }

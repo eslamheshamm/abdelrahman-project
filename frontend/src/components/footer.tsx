@@ -33,9 +33,14 @@ const Link: React.FC<LinkProps> = (props) => {
 };
 const Footer: React.FC = () => {
 	return (
-		<footer className="font-inter absolute bottom-0 w-full mx-auto pb-6">
+		<footer className="font-inter absolute bottom-0 left-0 right-0 w-11/12 mx-auto  pb-6 ">
 			<div className="flex flex-col md:flex-row items-center justify-between w-full">
-				<a href="http://google.com" target="_blank" rel="noopener noreferrer">
+				<a
+					href="http://google.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="mb-2 md:mb-0"
+				>
 					@Abdelrahman
 				</a>
 				<ul className="flex">

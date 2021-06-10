@@ -4,7 +4,7 @@ import GalleryImagePreview from "./ImagePreview";
 
 const Galleries: React.FC = () => {
 	return (
-		<section>
+		<section className="w-11/12 mx-auto">
 			{galleries.map(({ img, alt, id, title }) => {
 				return (
 					<GalleryImagePreview
