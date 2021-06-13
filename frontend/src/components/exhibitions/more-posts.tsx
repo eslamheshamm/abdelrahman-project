@@ -34,11 +34,16 @@ const MorePosts: React.FC<Props> = (props) => {
 			}
 		}
 	};
+
 	return (
 		<div className="my-16">
-			<h2 className="font-fahkwang uppercase text-2xl mb-8">
-				enjoy your eyes!
-			</h2>
+			{posts.length > 1 ? (
+				<h2 className="font-fahkwang uppercase text-2xl mb-8">
+					enjoy your eyes!
+				</h2>
+			) : (
+				""
+			)}
 			<div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
 				{posts &&
 					posts.map((post, index) => (
