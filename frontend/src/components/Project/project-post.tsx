@@ -199,4 +199,3 @@ const Dot = (
 );
 
 export default ProjectPost;
-// row-start-${img.rowStart} row-end-${img.rowEnd}
