@@ -7,7 +7,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 
 interface Props extends Exhibition {}
-const ProjectPostPreview: React.FC<Props> = (props) => {
+const ExhibitionPostPreview: React.FC<Props> = (props) => {
 	const { mainImage } = props;
 	const getImageSource = (): string | undefined => {
 		if (mainImage) {
@@ -24,7 +24,7 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 	};
 	return (
 		<article className="flex flex-col">
-			<Link to={props.slug && `/project/${props.slug.current}`}>
+			<Link to={props.slug && `/exhibition/${props.slug.current}`}>
 				{props.mainImage && props.mainImage.asset && (
 					<LazyLoadImage
 						src={getImageSource()}
@@ -36,7 +36,7 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 					/>
 				)}
 			</Link>
-			<Link to={props.slug && `/project/${props.slug.current}`}>
+			<Link to={props.slug && `/exhibition/${props.slug.current}`}>
 				<h1 className="mt-4 mb-2 uppercase text-2xl lg:text-3xl hover:underline">
 					{props.title}
 				</h1>
@@ -46,4 +46,4 @@ const ProjectPostPreview: React.FC<Props> = (props) => {
 	);
 };
 
-export default ProjectPostPreview;
+export default ExhibitionPostPreview;

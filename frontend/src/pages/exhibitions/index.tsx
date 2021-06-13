@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SanityClient from "../../helpers/client";
-import ProjectPostPreviewGrid from "../../components/Project/project-post-preview-list";
+import ExhibitonsPostPreviewGrid from "../../components/exhibitions/exhibition-post-preview-list";
 interface Excerpt {
 	children: Excerpt[];
 	style: string;
@@ -32,7 +32,7 @@ const ExhibitionScreen: React.FC = () => {
 	useEffect(() => {
 		SanityClient.fetch<Exhibition[]>(
 			`
-			*[_type == 'post'] {
+			*[_type == 'exhibitions'] {
 				_id,
 				title, 
 				slug{
@@ -53,13 +53,13 @@ const ExhibitionScreen: React.FC = () => {
 		)
 			.then((data) => {
 				setPosts(data);
+				console.log(data);
 			})
 			.catch((error) => {
 				setError(error);
 				console.log(error);
 			});
 	}, []);
-	const previewPosts = posts!;
 	if (error)
 		return (
 			<div
@@ -73,12 +73,12 @@ const ExhibitionScreen: React.FC = () => {
 				</p>
 			</div>
 		);
-	if (!previewPosts)
+	if (!posts)
 		return <p className="w-10/12 mx-auto text-3xl font-bold">Loading...</p>;
 
 	return (
 		<>
-			<ProjectPostPreviewGrid data={previewPosts} />
+			<ExhibitonsPostPreviewGrid data={posts} />
 		</>
 	);
 };

@@ -11,7 +11,7 @@ const Layouts: React.FC<LayoutsProps> = (props) => {
 
 	return (
 		<main
-			className={`"mx-auto pt-6 pb-16 min-h-screen h-full relative overflow-hidden hide-content ${
+			className={`"mx-auto pt-6 pb-16 min-h-screen h-full relative ${
 				isOpen ? "overflow-hidden" : ""
 			}"`}
 		>
@@ -35,7 +35,7 @@ const Layouts: React.FC<LayoutsProps> = (props) => {
 							</Link>
 						</li>
 						<li className="my-4">
-							<Link to="/exhibition" onClick={() => setOpen(false)}>
+							<Link to="/exhibitions" onClick={() => setOpen(false)}>
 								Exhibition
 							</Link>
 						</li>

@@ -2,14 +2,16 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Galleries from "./pages/galleries";
-import Exhibition from "./pages/exhibition";
+import Exhibition from "./pages/exhibitions";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import Layouts from "./components/layots";
-import ProjectPost from "./components/Project/project-post";
-import ProjectPostPreview from "./components/Project/project-post-preview";
+import ProjectPost from "./components/project/project-post";
+import ProjectPostPreview from "./components/project/project-post-preview";
 import GalleryScreen from "./components/galleries";
 import GallerImagePreview from "./pages/galleries/ImagePreview";
+import ExhibitiontPost from "./components/exhibitions/exhibition-post";
+import ExhibitionPostPreview from "./components/exhibitions/exhibition-post-preview";
 const App: React.FC = () => {
 	return (
 		<Router>
@@ -19,7 +21,9 @@ const App: React.FC = () => {
 					<Route path="/galleries" component={Galleries} />
 					<Route path="/gallery/:id" component={GalleryScreen} />
 					<Route path="/gallery" component={GallerImagePreview} />
-					<Route path="/exhibition" component={Exhibition} />
+					<Route path="/exhibitions" component={Exhibition} />
+					<Route path="/exhibition/:slug" component={ExhibitiontPost} />
+					<Route path="/exhibition/" component={ExhibitionPostPreview} />
 					<Route path="/project/:slug" component={ProjectPost} />
 					<Route path="/project/" component={ProjectPostPreview} />
 					<Route path="/about" component={About} />

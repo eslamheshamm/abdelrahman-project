@@ -5,15 +5,15 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // We import object and document schemas
-import blockContent from "./blockContent";
-import category from "./category";
-import post from "./post";
+import blockContent from "./objects/blockContent";
+import category from "./documents/category";
+import post from "./documents/post";
 import portrait from "./documents/galleries/portrait";
 import documentary from "./documents/galleries/documentary";
 import cinematography from "./documents/galleries/cinematography";
 import street from "./documents/galleries/street";
 import commercialShots from "./documents/galleries/commercial-shots";
-
+import exhibitions from "./documents/exhibitions";
 // objects
 import gallery from "./objects/gallery";
 import mainImage from "./objects/mainImage";
@@ -36,6 +36,7 @@ export default createSchema({
 		commercialShots,
 		category,
 		gallery,
+		exhibitions,
 		// When added to this list, object types can be used as
 		// { type: 'typename' } in other document schemas
 		blockContent,

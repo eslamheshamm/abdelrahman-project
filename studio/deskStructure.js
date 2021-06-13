@@ -1,5 +1,6 @@
 import S from "@sanity/desk-tool/structure-builder";
 import projectPost from "./src/structure/project-post";
+import ExhibitionPost from "./src/structure/exhibition-post";
 import Galleries from "./src/structure/galleries";
 const hiddenDocTypes = (listItem) =>
 	![
@@ -10,6 +11,7 @@ const hiddenDocTypes = (listItem) =>
 		"cinematography",
 		"street",
 		"commercial-shots",
+		"exhibitions",
 	].includes(listItem.getId());
 
 export default () =>
@@ -20,6 +22,7 @@ export default () =>
 			// 	.title("Blog")
 			// 	.child(S.document().schemaType("post").documentId("post")),
 			projectPost,
+			ExhibitionPost,
 			Galleries,
 			// S.documentListItem()
 			// 	.schemaType("portrait")
